@@ -7,7 +7,8 @@ export const typeDefs = `#graphql
     type Review {
         id: ID!
         name: Int!
-        contanet: String!
+        content: String!
+        rating: Int!
     }
     type Author {
         id: ID!
@@ -16,7 +17,10 @@ export const typeDefs = `#graphql
     }
     type Query {
         reviews: [Review]
+        review(id: ID!): Review
         games: [Game]
+        game(id: ID!): Game
         authors: [Author]
+        author(id: ID!): Author 
     }
 `
