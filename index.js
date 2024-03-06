@@ -10,13 +10,13 @@ const resolvers = {
       return db.games;
     },
     game(_, args, context) {
-      return db.games.find((game)=>game.id === args.id);
+      return db.games.find((game) => game.id === args.id);
     },
     authors() {
       return db.authors;
     },
     author(_, args, context) {
-      return db.authors.find((author)=>author.id === args.id);
+      return db.authors.find((author) => author.id === args.id);
     },
     reviews() {
       return db.reviews;
@@ -25,6 +25,24 @@ const resolvers = {
       return db.reviews.find((review) => review.id === args.id);
     },
   },
+  Game: {
+    reviews(parent) {
+      return db.reviews.filter((r) => r.game_id === parent.id);
+    },
+  },
+  Author: {
+    reviews(parent) {
+      return db.reviews.filter((r) => r.author_id === parent.id);
+    },
+  },
+  Review: {
+    game(parent) {
+      return db.games.find((r) => r.id === parent.game_id);
+    },
+    author(parent) {
+      return db.authors.find((r) => r.id === parent.author_id);
+    }
+  }
 };
 
 //server setup
